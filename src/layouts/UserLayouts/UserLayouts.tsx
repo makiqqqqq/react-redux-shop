@@ -1,9 +1,19 @@
 import AvatarBlock from "@/components/AvatarBlock";
+import Button from "@/components/Button";
 import LogOutIcon from "@/components/Icons/LogOutIcon";
 import NavBar from "@/components/NavBar";
+import { useNavigation } from "@/hooks/useNavigation/useNavigation.tsx";
+import { ROUTES } from "@/utils/routes.tsx";
 import { FC, PropsWithChildren } from "react";
 
 const UserLayouts: FC<PropsWithChildren> = ({ children }) => {
+  const { navigateTo } = useNavigation();
+
+  const logout = () => {
+    //TODO delete tokens and more...
+    navigateTo(ROUTES.LOGIN);
+  };
+
   return (
     <>
       <aside
@@ -16,8 +26,10 @@ const UserLayouts: FC<PropsWithChildren> = ({ children }) => {
           <NavBar />
           <div className="absolute bottom-5">
             <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-              <LogOutIcon />
-              <span className="flex-1 ml-3 whitespace-nowrap">Log out</span>
+              <Button className="p-1" onClick={logout}>
+                <LogOutIcon />
+                <span className="flex-1 ml-3 whitespace-nowrap">Log out</span>
+              </Button>
             </a>
           </div>
         </div>

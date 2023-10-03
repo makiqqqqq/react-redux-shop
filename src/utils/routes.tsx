@@ -1,17 +1,19 @@
 import { lazy } from "react";
 import { RouteProps } from "react-router-dom";
 
-export const ROUTES = {
-  MAIN: "/",
-  ABOUT: "/about",
-  LOGIN: "/login",
-  CART: "/cart",
-  MENU: "/menu",
-};
+export enum ROUTES {
+  MAIN = "/",
+  ABOUT = "/about",
+  LOGIN = "/login",
+  REGISTER = "/register",
+  CART = "/cart",
+  MENU = "/menu",
+}
 
 const Main = lazy(() => import("@/pages/Main"));
 const About = lazy(() => import("@/pages/About"));
 const Login = lazy(() => import("@/pages/Login"));
+const Register = lazy(() => import("@/pages/Register"));
 const Cart = lazy(() => import("@/pages/Cart"));
 const Menu = lazy(() => import("@/pages/Menu"));
 const Product = lazy(() => import("@/pages/Product"));
@@ -48,5 +50,9 @@ export const PublicRoutes: RouteProps[] = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ];
