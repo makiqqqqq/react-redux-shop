@@ -9,6 +9,7 @@ export enum METHODS {
 export enum ENDPOINTS {
   LOGIN = "/auth/login",
   REGISTER = "/users/",
+  GET_USER = "/auth/profile",
 }
 
 export enum ACTION_NAME {
@@ -18,6 +19,7 @@ export enum ACTION_NAME {
 export enum ACTION_TYPE {
   register = "register",
   login = "login",
+  get = "get",
 }
 
 export type QueryPath = Record<ACTION_NAME, Record<ACTION_TYPE, { url: ENDPOINTS; method: METHODS }>>;

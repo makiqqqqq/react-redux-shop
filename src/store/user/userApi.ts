@@ -19,7 +19,7 @@ export const userApi = createApi({
     }),
     getUsers: builder.query<GetUserResponseParams, GetUserRequestParams>({
       query: ({ accessToken }: GetUserRequestParams) => ({
-        url: "/auth/profile",
+        ...userQueryParams.user.get,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

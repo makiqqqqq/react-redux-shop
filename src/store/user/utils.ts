@@ -10,5 +10,9 @@ export const userQueryParams: QueryPath = {
       url: ENDPOINTS.LOGIN,
       method: METHODS.POST,
     },
+    get: {
+      url: ENDPOINTS.GET_USER,
+      method: METHODS.GET,
+    },
   },
 };
