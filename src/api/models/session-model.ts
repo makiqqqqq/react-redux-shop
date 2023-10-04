@@ -10,4 +10,5 @@ export type LoginResponseParams = {
 
 export type RegisterRequestParams = {
   name: string;
+  avatar: string;
 } & LoginRequestParams;

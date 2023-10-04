@@ -1,4 +1,4 @@
-import { useNavigation } from "@/hooks/useNavigation/useNavigation.tsx";
+import { useNavigation } from "@/hooks/useNavigation.tsx";
 import { useApi } from "@/pages/Login/hooks/useApi.ts";
 import { useValidate } from "@/pages/Login/hooks/useValidate.ts";
 import { LoginForm } from "@/pages/Login/types.ts";
@@ -25,17 +25,21 @@ export const useLoginForm = () => {
   type LoginSchemaType = z.infer<typeof LoginSchema>;
 
   const onSubmit = async (data: LoginForm) => {
-    const result = await loginMutation(data);
-    if ("error" in result) {
-      alert("error");
-    } else {
-      dispatch(
-        addTokens({
-          accessToken: loginMutationParams.data.accessToken,
-          refreshToken: loginMutationParams.data.refreshToken,
-        }),
-      );
-      navigateTo(ROUTES.MAIN);
+    try {
+      const result = await loginMutation(data);
+      if ("error" in result) {
+        alert(loginMutationParams.error);
+      } else {
+        await dispatch(
+          addTokens({
+            accessToken: loginMutationParams.data.access_token,
+            refreshToken: loginMutationParams.data.refresh_token,
+          }),
+        );
+        await navigateTo(ROUTES.MAIN);
+      }
+    } catch (error) {
+      console.error("Error during form submission:", error);
     }
   };
 

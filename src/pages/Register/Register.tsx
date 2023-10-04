@@ -3,11 +3,17 @@ import { useRegisterForm } from "@/pages/Register/hooks/useRegisterForm.ts";
 import { RegisterForm } from "@/pages/Register/types.ts";
 
 const Register = () => {
-  const { form, handleSubmit, isLoading } = useRegisterForm();
+  const { form, handleSubmit, isLoading, setSelectedImage } = useRegisterForm();
 
-  console.log(form.formState.errors);
-
-  return <AuthWrapper<RegisterForm> form={form} handleSubmit={handleSubmit} isLoading={isLoading} isRegister />;
+  return (
+    <AuthWrapper<RegisterForm>
+      form={form}
+      handleSubmit={handleSubmit}
+      isLoading={isLoading}
+      isRegister
+      setSelectedImage={setSelectedImage}
+    />
+  );
 };
 
 export default Register;

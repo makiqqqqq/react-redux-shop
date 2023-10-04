@@ -4,7 +4,7 @@ export const userQueryParams: QueryPath = {
   user: {
     register: {
       url: ENDPOINTS.REGISTER,
-      method: METHODS.GET,
+      method: METHODS.POST,
     },
     login: {
       url: ENDPOINTS.LOGIN,

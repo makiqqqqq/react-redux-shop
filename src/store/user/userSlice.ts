@@ -1,13 +1,17 @@
+import { GetUserResponseParams } from "@/api/models/user-model.ts";
+import { getLocalStorageItem } from "@/utils/storage.ts";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type UserState = {
   accessToken: string | null;
   refreshToken: string | null;
+  user: GetUserResponseParams;
 };
 
 const initialState: UserState = {
-  accessToken: null,
-  refreshToken: null,
+  accessToken: getLocalStorageItem("accessToken"),
+  refreshToken: getLocalStorageItem("refreshToken"),
+  user: {} as GetUserResponseParams,
 };
 
 const userSlice = createSlice({
@@ -23,6 +27,9 @@ const userSlice = createSlice({
     ) => {
       state.refreshToken = action.payload.refreshToken;
       state.accessToken = action.payload.accessToken;
+    },
+    setUser: (state, action: PayloadAction<{ user: GetUserResponseParams }>) => {
+      state.user = action.payload.user;
     },
     logout: (state) => {
       state.refreshToken = null;

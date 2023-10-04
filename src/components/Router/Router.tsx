@@ -9,7 +9,7 @@ const Router = () => {
       <Route
         element={
           <UserLayouts>
-            <ProtectedRouteOutlet isAuth={true} />
+            <ProtectedRouteOutlet />
           </UserLayouts>
         }
       >

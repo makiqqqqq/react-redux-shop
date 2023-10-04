@@ -1,4 +1,5 @@
 export type AvatarBlockProps = {
   email: string;
-  userName: string;
+  name: string;
+  avatar: string;
 };

@@ -1,4 +1,5 @@
 import { LoginRequestParams, RegisterRequestParams } from "@/api/models/session-model.ts";
+import { GetUserRequestParams, GetUserResponseParams } from "@/api/models/user-model.ts";
 import { userQueryParams } from "@/store/user/utils.ts";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -16,6 +17,14 @@ export const userApi = createApi({
         body: body,
       }),
     }),
+    getUsers: builder.query<GetUserResponseParams, GetUserRequestParams>({
+      query: ({ accessToken }: GetUserRequestParams) => ({
+        url: "/auth/profile",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
     register: builder.mutation({
       query: (body: RegisterRequestParams) => ({
         ...userQueryParams.user.register,
@@ -25,4 +34,4 @@ export const userApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = userApi;
+export const { useLoginMutation, useRegisterMutation, useGetUsersQuery } = userApi;
