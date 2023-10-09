@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 const UserLayouts: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { user, isLoading } = useGetUserApi();
+
   const { logout, setUser } = userActions;
   const handleLogout = () => {
     dispatch(logout());

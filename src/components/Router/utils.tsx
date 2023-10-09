@@ -11,11 +11,11 @@ export const ProtectedRouteOutlet: FC<ProtectedRouteProps> = ({ redirectTo = ROU
   return isAuth ? <Outlet /> : <Navigate to={redirectTo} />;
 };
 
-// export const PublicRouteOutlet: FC<ProtectedRouteProps> = ({ redirectTo = ROUTES.MAIN }) => {
-//   const isAuth = useSelector((state: RootState) => state.user.accessToken);
-//
-//   return isAuth ? <Navigate to={redirectTo} /> : <Outlet />;
-// };
+export const PublicRouteOutlet: FC<ProtectedRouteProps> = ({ redirectTo = ROUTES.MAIN }) => {
+  const isAuth = useSelector((state: RootState) => state.user.accessToken);
+
+  return isAuth ? <Navigate to={redirectTo} /> : <Outlet />;
+};
 
 export const createRouter = ({ element, path, ...other }: RouteProps) => (
   <Route {...other} key={path} path={path} element={<Suspense fallback={<div>Loading...</div>}>{element}</Suspense>} />

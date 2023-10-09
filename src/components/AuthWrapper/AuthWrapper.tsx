@@ -30,7 +30,7 @@ const AuthWrapper = <T extends {}>({
               {title}
             </h1>
             {isRegister && <AuthAvatarBlock setSelectedImage={setSelectedImage} />}
-            <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               {isRegister && (
                 <InputController control={form.control} name="name" type="text" placeholder="Makiqqq" id="name" />
               )}
@@ -48,8 +48,8 @@ const AuthWrapper = <T extends {}>({
                 control={form.control}
                 placeholder="••••••••"
               />
-              <div className="! mt-8">
-                <Button type="submit" isProcessing={isLoading}>
+              <div className="!mt-8">
+                <Button type="submit" isProcessing={isLoading} disabled={isLoading}>
                   {buttonText}
                 </Button>
               </div>

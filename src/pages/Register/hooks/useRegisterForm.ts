@@ -22,20 +22,16 @@ export const useRegisterForm = () => {
 
   type RegisterSchemaType = z.infer<typeof RegisterSchema>;
 
-  console.log("useRegisterForm.ts / L25 -- selectedImage -->", selectedImage);
-
   const onSubmit = async (data: RegisterForm) => {
-    const result = await registerMutation({
-      ...data,
-      avatar: selectedImage,
-    });
-
-    console.log("useRegisterForm.ts / L33 -- result -->", result);
-
-    if ("error" in result) {
-      alert("error");
-    } else {
-      navigateTo(ROUTES.MAIN);
+    try {
+      await registerMutation({
+        ...data,
+        avatar: selectedImage,
+      });
+      alert("Register Successes!!!");
+      navigateTo(ROUTES.LOGIN);
+    } catch (error) {
+      alert(error);
     }
   };
 

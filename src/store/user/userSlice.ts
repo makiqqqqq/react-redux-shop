@@ -27,6 +27,8 @@ const userSlice = createSlice({
     ) => {
       state.refreshToken = action.payload.refreshToken;
       state.accessToken = action.payload.accessToken;
+      // setStorageItem(action.payload.accessToken, "accessToken");
+      // setStorageItem(action.payload.refreshToken, "refreshToken");
     },
     setUser: (state, action: PayloadAction<{ user: GetUserResponseParams }>) => {
       state.user = action.payload.user;

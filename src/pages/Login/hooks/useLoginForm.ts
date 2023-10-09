@@ -15,6 +15,8 @@ const defaultValues: LoginForm = {
 };
 
 export const useLoginForm = () => {
+  type LoginSchemaType = z.infer<typeof LoginSchema>;
+
   const { LoginSchema, zodResolverLogin } = useValidate();
   const form = useForm<LoginSchemaType>({ defaultValues, resolver: zodResolverLogin() });
   const dispatch = useDispatch<AppDispatch>();
@@ -22,24 +24,22 @@ export const useLoginForm = () => {
   const { addTokens } = userActions;
   const { navigateTo } = useNavigation();
 
-  type LoginSchemaType = z.infer<typeof LoginSchema>;
-
-  const onSubmit = async (data: LoginForm) => {
+  const onSubmit = async (data: LoginSchemaType) => {
     try {
       const result = await loginMutation(data);
-      if ("error" in result) {
-        alert(loginMutationParams.error);
-      } else {
-        await dispatch(
+      if ("data" in result) {
+        dispatch(
           addTokens({
-            accessToken: loginMutationParams.data.access_token,
-            refreshToken: loginMutationParams.data.refresh_token,
+            accessToken: result.data.access_token,
+            refreshToken: result.data.refresh_token,
           }),
         );
-        await navigateTo(ROUTES.MAIN);
+        navigateTo(ROUTES.MAIN);
+      } else if ("error" in result) {
+        console.error("Error:", result.error);
       }
     } catch (error) {
-      console.error("Error during form submission:", error);
+      console.error("Error:", error);
     }
   };
 
